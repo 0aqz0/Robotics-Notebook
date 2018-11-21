@@ -6,6 +6,7 @@ A* path planning implementation with python
 import math
 from collections import deque
 import matplotlib.pyplot as plt
+import time
 
 grid_size = 1.0      # grid resolution
 robot_size = 1.0     # robot size
@@ -32,12 +33,6 @@ class Node:
         self.cost = cost
         self.parent = parent
 
-def generate_final_path():
-    """
-    generate the final path from the goal
-    """
-    pass
-
 def calculate_heuristic(node1, node2):
     """
     calculate the heuristic evaluation from node1 to node2
@@ -49,7 +44,7 @@ def calculate_heuristic(node1, node2):
 
 def a_star_planning(start_x, start_y, goal_x, goal_y, obstacle_x, obstacle_y):
     """
-
+    A* path planning implementation
     :param start_x:
     :param start_y:
     :param goal_x:
@@ -61,24 +56,83 @@ def a_star_planning(start_x, start_y, goal_x, goal_y, obstacle_x, obstacle_y):
     # extract the index of start node, goal node and obstacles
     start = Node(round(start_x/grid_size), round(start_y/grid_size), 0.0, -1)
     goal = Node(round(goal_x/grid_size), round(goal_y/grid_size), 0.0, -1)
-    obstacle_x = [round(obs_x/grid_size) for obs_x in obstacle_x]
-    obstacle_y = [round(obs_y/grid_size) for obs_y in obstacle_y]
+    obstacle_x = [round(obs_x / grid_size) for obs_x in obstacle_x]
+    obstacle_y = [round(obs_y / grid_size) for obs_y in obstacle_y]
 
-    obstacles = [[obstacle_x[i],obstacle_y[i]] for i in range(len(obstacle_x))]
+    obstacles = [[obstacle_x[i], obstacle_y[i]] for i in range(len(obstacle_x))]
 
-    # plot the obstacles
+    # plot the start node and goal node, and obstacles
+    plt.plot(start.x, start.y, "ro")
+    plt.plot(goal.x, goal.y, "go")
     for obs in obstacles:
-        plt.plot(obs[0],obs[1],"b")
+        plt.plot(obs[0], obs[1], "xc")
+    plt.pause(0.001)
+    # time.sleep(10)
 
     # create the open list and close list to store nodes
     openset, closeset = deque(), deque()
     openset.append(start)
 
-    # while True:
-    #     # find out the min f node to explore
-    #     current_id = min(openset,
-    #                      key=lambda i: openset[i].cost + calculate_heuristic(openset[i],goal))
-    #     current_node = openset[current_id]
+    while True:
+        # find out the min f node to explore
+        current_node = min(openset,
+                         key=lambda node: node.cost + calculate_heuristic(node,goal))
+
+        plt.plot(current_node.x, current_node.y, "b*")
+        if len(closeset) % 10 == 0:
+            plt.pause(0.001)
+
+        if current_node.x == goal.x and current_node.y == goal.y:
+            print("Congratulations! You have found the goal!")
+            goal.parent = current_node
+            break
+
+        # Remove it from the open list
+        openset.remove(current_node)
+        # Add it to the close list
+        closeset.append(current_node)
+
+        # Explore the neighbour
+        for motion in motions:
+            node = Node(current_node.x + motion[0],
+                        current_node.y + motion[1],
+                        current_node.cost + motion[2],
+                        current_node)
+
+            # ignore it if it is in the close list
+            for item in closeset:
+                if item.x == node.x and item.y == node.y:
+                    continue
+            # ignore it if it is obstacle
+            flag = False
+            for obstacle in obstacles:
+                if obstacle[0] == node.x and obstacle[1] == node.y:
+                    flag = True
+                    break
+            if flag:
+                continue
+            # update its parent if it is the open list
+            flag = True
+            for item in openset:
+                if item.x == node.x and item.y == node.y:
+                    flag = False
+                    # if closer, update the parent
+                    if node.cost <= item.cost:
+                        item.parent = node.parent
+                    break
+            # add to the open list if it is not in the open list
+            if flag:
+                openset.append(node)
+
+    # generate the final path
+    while True:
+        plt.plot(goal.x, goal.y, "rx")
+        if goal.parent == -1:
+            break
+        else:
+            goal = goal.parent
+    plt.show()
+
 
 if __name__ == '__main__':
     start_x = 10.0
@@ -101,15 +155,8 @@ if __name__ == '__main__':
     for i in range(40):
         obstacle_x.append(20.0)
         obstacle_y.append(i)
-    for i in range(40):
+    for i in range(20):
         obstacle_x.append(40.0)
         obstacle_y.append(60.0-i)
 
-    obstacle_x = [round(obs_x / grid_size) for obs_x in obstacle_x]
-    obstacle_y = [round(obs_y / grid_size) for obs_y in obstacle_y]
-
-    obstacles = [[obstacle_x[i], obstacle_y[i]] for i in range(len(obstacle_x))]
-
-    # plot the obstacles
-    for obs in obstacles:
-        plt.plot(obs[0], obs[1], "b")
+    a_star_planning(start_x, start_y, goal_x, goal_y, obstacle_x, obstacle_y)
