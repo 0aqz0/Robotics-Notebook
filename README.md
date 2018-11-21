@@ -4,4 +4,4 @@
 
 ### A*
 
-![astar](astar/astar.gif)
+![astar](PathPlanning/astar/astar.gif)
