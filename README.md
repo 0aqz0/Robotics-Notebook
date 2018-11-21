@@ -4,4 +4,4 @@
 
 ### A*
 
-![astar](astar.gif)
+![astar](astar/astar.gif)
