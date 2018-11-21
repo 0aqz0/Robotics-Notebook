@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ff854af4-9c78-46ff-b00f-3984495da46f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/PathPlanning/astar/astar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PathPlanning/Qlearning/view.qmlc" beforeDir="false" afterPath="$PROJECT_DIR$/PathPlanning/Qlearning/view.qmlc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PathPlanning/astar/astar.py" beforeDir="false" afterPath="$PROJECT_DIR$/PathPlanning/astar/astar.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,7 +19,8 @@
           <entry key="project.closed" value="2" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="2" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -34,49 +37,31 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="123" />
+          <entry key="py" value="2509" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="123" />
+          <entry key="Python" value="2509" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PathPlanning/Qlearning/main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
-              <folding>
-                <element signature="e#35#44#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/PathPlanning/astar/astar.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PathPlanning/Qlearning/view.qml">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PathPlanning/Qlearning/RL_brain.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="11" selection-start-column="11" selection-end-column="11" />
+            <state relative-caret-position="19">
+              <caret line="22" column="1" lean-forward="true" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+              <folding>
+                <element signature="e#87#98#0" expanded="true" />
+                <element signature="e#598#805#0" />
+                <marker date="1542789391842" expanded="true" signature="849:986" ph="..." />
+                <marker date="1542789391842" expanded="true" signature="1071:1076" ph="..." />
+                <marker date="1542789391842" expanded="true" signature="1120:1125" ph="..." />
+                <marker date="1542789391842" expanded="true" signature="1429:1434" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -101,9 +86,9 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="360" />
-    <option name="y" value="866" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="540" />
+    <option name="y" value="174" />
     <option name="width" value="2208" />
     <option name="height" value="1522" />
   </component>
@@ -112,7 +97,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -125,16 +109,11 @@
               <item name="Robotics-Notebook" type="462c0819:PsiDirectoryNode" />
               <item name="PathPlanning" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="Robotics-Notebook" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Robotics-Notebook" type="462c0819:PsiDirectoryNode" />
-              <item name="PathPlanning" type="462c0819:PsiDirectoryNode" />
-              <item name="Qlearning" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -153,7 +132,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.astar">
     <configuration name="RL_brain" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Robotics-Notebook" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -167,6 +146,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/PathPlanning/Qlearning/RL_brain.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="astar" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Robotics-Notebook" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/PathPlanning/astar" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/PathPlanning/astar/astar.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -199,9 +199,11 @@
     <list>
       <item itemvalue="Python.main" />
       <item itemvalue="Python.RL_brain" />
+      <item itemvalue="Python.astar" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.astar" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.RL_brain" />
       </list>
@@ -221,15 +223,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1381" height="885" extended-state="6" />
+    <frame x="270" y="87" width="1104" height="761" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24981412" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.31460676" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32934928" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3290938" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -249,7 +251,7 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/PathPlanning/Qlearning/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
+        <state relative-caret-position="38">
           <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
           <folding>
             <element signature="e#35#44#0" expanded="true" />
@@ -269,8 +271,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/PathPlanning/astar/astar.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        <state relative-caret-position="19">
+          <caret line="22" column="1" lean-forward="true" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+          <folding>
+            <element signature="e#87#98#0" expanded="true" />
+            <element signature="e#598#805#0" />
+            <marker date="1542789391842" expanded="true" signature="849:986" ph="..." />
+            <marker date="1542789391842" expanded="true" signature="1071:1076" ph="..." />
+            <marker date="1542789391842" expanded="true" signature="1120:1125" ph="..." />
+            <marker date="1542789391842" expanded="true" signature="1429:1434" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
