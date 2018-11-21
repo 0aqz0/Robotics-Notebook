@@ -13,3 +13,6 @@ parent: node to track back
 Path planning: F(n) = G + H
 
 Heuristics Function: Manhattan Distance
+
+
+![astar](astar.gif)
