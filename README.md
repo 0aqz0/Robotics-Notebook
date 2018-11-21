@@ -4,3 +4,4 @@
 
 ### A*
 
+![astar](astar.gif)
