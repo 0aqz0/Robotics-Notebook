@@ -16,3 +16,8 @@ Heuristics Function: Manhattan Distance
 
 
 ![astar](astar.gif)
+
+## Exploration
+
+- other heuristics functions
+- less time complexity
