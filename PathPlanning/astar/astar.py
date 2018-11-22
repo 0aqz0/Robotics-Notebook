@@ -118,6 +118,7 @@ def a_star_planning(start_x, start_y, goal_x, goal_y, obstacle_x, obstacle_y):
                     flag = False
                     # if closer, update the parent
                     if node.cost <= item.cost:
+                        item.cost = node.cost
                         item.parent = node.parent
                     break
             # add to the open list if it is not in the open list
