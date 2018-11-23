@@ -5,3 +5,7 @@
 ### A*
 
 ![astar](PathPlanning/astar/astar.gif)
+
+## To do list
+
+- fix some bugs
