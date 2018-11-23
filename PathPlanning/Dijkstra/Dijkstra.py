@@ -77,7 +77,7 @@ def Dijkstra_planning(start_x, start_y, goal_x, goal_y, obstacle_x, obstacle_y):
         # find out the min f node to explore
         current_node = min(openset,
                          key=lambda node: calculate_heuristic(node,goal))
-        print(str(current_node.x)+'    '+str(current_node.y))
+        # print(str(current_node.x)+'    '+str(current_node.y))
 
         plt.plot(current_node.x, current_node.y, "b*")
         if len(closeset) % 10 == 0:
@@ -101,9 +101,13 @@ def Dijkstra_planning(start_x, start_y, goal_x, goal_y, obstacle_x, obstacle_y):
                         current_node)
 
             # ignore it if it is in the close list
+            flag = False
             for item in closeset:
                 if item.x == node.x and item.y == node.y:
-                    continue
+                    flag = True
+                    break
+            if flag:
+                continue
             # ignore it if it is obstacle
             flag = False
             for obstacle in obstacles:
