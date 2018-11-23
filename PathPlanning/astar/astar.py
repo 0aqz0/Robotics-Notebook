@@ -100,9 +100,13 @@ def a_star_planning(start_x, start_y, goal_x, goal_y, obstacle_x, obstacle_y):
                         current_node)
 
             # ignore it if it is in the close list
+            flag = False
             for item in closeset:
                 if item.x == node.x and item.y == node.y:
-                    continue
+                    flag = True
+                    break
+            if flag:
+                continue
             # ignore it if it is obstacle
             flag = False
             for obstacle in obstacles:
