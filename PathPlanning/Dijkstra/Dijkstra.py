@@ -45,13 +45,6 @@ def calculate_heuristic(node1, node2):
 def Dijkstra_planning(start_x, start_y, goal_x, goal_y, obstacle_x, obstacle_y):
     """
     Dijkstra path planning implementation
-    :param start_x:
-    :param start_y:
-    :param goal_x:
-    :param goal_y:
-    :param obstacle_x:
-    :param obstacle_y:
-    :return:
     """
     # extract the index of start node, goal node and obstacles
     start = Node(round(start_x/grid_size), round(start_y/grid_size), 0.0, -1)
@@ -144,7 +137,7 @@ if __name__ == '__main__':
     start_x = 10.0
     start_y = 10.0
     goal_x = 50.0
-    goal_y = 50.0
+    goal_y = 10.0
 
     for i in range(60):
         obstacle_x.append(i)
@@ -161,8 +154,11 @@ if __name__ == '__main__':
     for i in range(40):
         obstacle_x.append(20.0)
         obstacle_y.append(i)
-    for i in range(20):
-        obstacle_x.append(40.0)
-        obstacle_y.append(60.0-i)
+    for i in range(30):
+        obstacle_x.append(60.0 - i)
+        obstacle_y.append(20.0)
+    for i in range(31):
+        obstacle_x.append(50.0 - i)
+        obstacle_y.append(40.0)
 
     Dijkstra_planning(start_x, start_y, goal_x, goal_y, obstacle_x, obstacle_y)
