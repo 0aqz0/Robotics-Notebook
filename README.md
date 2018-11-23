@@ -10,6 +10,10 @@
 
 ![Dijkstra](PathPlanning/Dijkstra/Dijkstra.gif)
 
+### Qlearning
+
+![qlearning](PathPlanning/Qlearning/qlearning.gif)
+
 ## To do list
 
 - fix some bugs
