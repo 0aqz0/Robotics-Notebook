@@ -4,15 +4,15 @@
 
 ### A*
 
-![astar](PathPlanning/astar/astar.gif)
+<img src="PathPlanning/astar/astar.gif" width="450" height="350">
 
 ### Dijkstra
 
-![Dijkstra](PathPlanning/Dijkstra/Dijkstra.gif)
+<img src="PathPlanning/Dijkstra/Dijkstra.gif" width="450" height="350">
 
 ### Qlearning
 
-![qlearning](PathPlanning/Qlearning/qlearning.gif)
+<img src="PathPlanning/Qlearning/qlearning.gif" width="450" height="350">
 
 ## To do list
 

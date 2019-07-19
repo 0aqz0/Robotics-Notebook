@@ -14,8 +14,7 @@ Path planning: F(n) = G + H
 
 Heuristics Function: Manhattan Distance
 
-
-![astar](astar.gif)
+<img src="astar.gif" width="450" height="350">
 
 ## Exploration
 

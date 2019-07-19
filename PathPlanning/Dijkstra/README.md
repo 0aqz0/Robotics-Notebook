@@ -15,7 +15,7 @@ Path planning: F(n) = H
 Heuristics Function: Manhattan Distance
 
 
-![Dijkstra](Dijkstra.gif)
+<img src="Dijkstra.gif" width="450" height="350">
 
 ## Exploration
 
