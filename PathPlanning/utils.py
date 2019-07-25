@@ -8,6 +8,12 @@ class Point:
         self.x = x
         self.y = y
 
+    def __eq__(self, other):
+        return self.x == other.x and self.y == other.y
+
+    def __add__(self, other):
+        return Point(self.x + other.x, self.y + other.y)
+
     def dist(self, point):
         """
         Distance to another point
@@ -17,9 +23,15 @@ class Point:
         return math.sqrt(pow(self.x - point.x, 2) + pow(self.y - point.y, 2))
 
 
+class Vector:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+
 class Node:
-    def __init__(self, x, y, parent=-1, cost=0):
-        self.pos = Point(x, y)
+    def __init__(self, pos, parent=None, cost=0):
+        self.pos = pos
         self.parent = parent
         self.cost = cost
 
@@ -40,6 +52,9 @@ class Map:
         self.right = max(left, right)
         self.length = math.fabs(left - right)
         self.width = math.fabs(top - down)
+
+    def outOfMap(self, pos):
+        return pos.x < self.left or pos.x > self.right or pos.y < self.down or pos.y > self.top
 
 
 class GridMap(Map):
