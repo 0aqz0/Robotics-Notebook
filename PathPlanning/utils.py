@@ -41,6 +41,9 @@ class Obstacle(object):
     def __init__(self, pos):
         self.pos = pos
 
+    def type(self):
+        raise  NotImplementedError
+
     def dist(self, other):
         raise NotImplementedError
 
@@ -52,6 +55,9 @@ class CircleObstacle(Obstacle):
     def __init__(self, pos, radius):
         Obstacle.__init__(self, pos)
         self.radius = radius
+
+    def type(self):
+        return "circle"
 
     def dist(self, other):
         return max(self.pos.dist(other) - self.radius, 0)
@@ -69,6 +75,9 @@ class RectangleObstacle(Obstacle):
         self.length = math.fabs(left - right)
         self.width = math.fabs(top - down)
         Obstacle.__init__(self, Point((left+right)/2, (top+down)/2))
+
+    def type(self):
+        return "rectangle"
 
     def dist(self, other):
         if other.x < self.left:
@@ -130,7 +139,7 @@ class PathPlanner(object):
     def __init__(self):
         self.finalPath = []
 
-    def plan(self):
+    def plan(self, start, target):
         """
         Plans the path.
         """

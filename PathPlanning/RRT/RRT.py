@@ -3,7 +3,7 @@
 """
 RRT path planning implementation with python
 """
-from ..utils import PathPlanner, Point, Node, Vector
+from PathPlanning.utils import PathPlanner, Point, Node, Vector
 import random
 import math
 
@@ -11,22 +11,20 @@ class RRTPlanner(PathPlanner):
     """
     Path Planner using RRT algorithm.
     """
-    def __init__(self, start, target, map, iterations=1e5, epsilon=0.05, stepSize=5):
+    def __init__(self, map, iterations=1e5, epsilon=0.05, stepSize=5):
         PathPlanner.__init__(self)
         self.nodeList = []
-        self.start = start
-        self.target = target
         self.map = map
         self.iterations = iterations
         self.epsilon = epsilon
         self.stepSize = stepSize
 
-    def plan(self):
+    def plan(self, start, target):
         self.nodeList = []
-        self.nodeList.append(Node(self.start))
-        for iter in range(self.iterations):
+        self.nodeList.append(Node(start))
+        for iter in range(int(self.iterations)):
             # random sample
-            randNode = Node(self.randomSample(self.epsilon, self.target))
+            randNode = Node(self.randomSample(self.epsilon, target))
             # find the nearest node
             nearestNode = self.findNearestNode(randNode)
             # expand the tree
@@ -34,7 +32,7 @@ class RRTPlanner(PathPlanner):
             newNode = Node(nearestNode.pos + Vector(self.stepSize * math.cos(theta), self.stepSize * math.sin(theta)), nearestNode)
 
             # outside the map
-            if self.map.outOfMap(newNode.pos):
+            if self.map.out_of_map(newNode.pos):
                 continue
             # in the node list
             if self.inNodeList(newNode):
@@ -44,15 +42,17 @@ class RRTPlanner(PathPlanner):
                 continue
 
             self.nodeList.append(newNode)
-            if newNode.pos.dist(self.target) < self.stepSize:
+            if newNode.pos.dist(target) < self.stepSize:
                 print("final")
                 self.finalPath = []
-                self.finalPath.append(self.target)
+                self.finalPath.append(target)
                 currentNode = self.nodeList[-1]
                 self.finalPath.append(currentNode.pos)
                 while currentNode.parent is not None:
                     self.finalPath.append(currentNode.parent.pos)
                     currentNode = currentNode.parent
+                self.finalPath.reverse()
+                break
 
 
     def findNearestNode(self, node):
