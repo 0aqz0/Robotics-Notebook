@@ -11,7 +11,7 @@ class RRTPlanner(PathPlanner):
     """
     Path Planner using RRT algorithm.
     """
-    def __init__(self, map, iterations=1e5, epsilon=0.05, stepSize=5):
+    def __init__(self, map, iterations=1e4, epsilon=0.05, stepSize=5):
         PathPlanner.__init__(self)
         self.nodeList = []
         self.map = map
@@ -38,10 +38,11 @@ class RRTPlanner(PathPlanner):
             if self.inNodeList(newNode):
                 continue
             # meet obstacles
-            if False:
+            if self.check_obstacle(newNode.pos):
                 continue
 
             self.nodeList.append(newNode)
+            # print("iter: ", iter, "newNode", nearestNode.pos.x, nearestNode.pos.y, newNode.pos.x, newNode.pos.y)
             if newNode.pos.dist(target) < self.stepSize:
                 print("final")
                 self.finalPath = []
@@ -53,7 +54,6 @@ class RRTPlanner(PathPlanner):
                     currentNode = currentNode.parent
                 self.finalPath.reverse()
                 break
-
 
     def findNearestNode(self, node):
         minDist = 1e10
@@ -73,5 +73,11 @@ class RRTPlanner(PathPlanner):
     def inNodeList(self, node):
         for candidate in self.nodeList:
             if candidate.pos == node.pos:
+                return True
+        return False
+
+    def check_obstacle(self, pos):
+        for obs in self.map.obstacles:
+            if obs.check_collision(pos, 10):
                 return True
         return False

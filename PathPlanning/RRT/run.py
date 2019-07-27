@@ -1,15 +1,20 @@
 from PathPlanning.RRT import RRTPlanner
-from PathPlanning.utils import Map, Point
+from PathPlanning.utils import Map, Point, RectangleObstacle
 import matplotlib.pyplot as plt
 
 def main():
     # create the map
-    map = Map(500, 0, 0, 1000)
+    map = Map(500, 0, 0, 500)
+    map.obstacles.append(RectangleObstacle(300, 0, 100, 150))
+    map.obstacles.append(RectangleObstacle(500, 200, 300, 350))
+    plt.plot([100, 100, 150, 150, 100], [0, 300, 300, 0, 0])
+    plt.plot([300, 300, 350, 350, 300], [200, 500, 500, 200, 200])
+    plt.plot([0, 0, 500, 500, 0], [0, 500, 500, 0, 0])
     # create the path planner
-    rrtPlanner = RRTPlanner(map)
-    # plan the path
+    rrtPlanner = RRTPlanner(map, epsilon=0.05, stepSize=10)
+    # plan the pat0
     start = Point(5, 5)
-    target = Point(100, 100)
+    target = Point(490, 500)
     rrtPlanner.plan(start, target)
     plt.scatter(start.x, start.y, linewidths=16)
     plt.scatter(target.x, target.y, linewidths=16)
