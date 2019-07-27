@@ -10,10 +10,9 @@
 
 <img src="PathPlanning/Dijkstra/Dijkstra.gif" width="450" height="350">
 
+### RRT
+<img src="PathPlanning/RRT/RRT.png" width="450" height="350">
+
 ### Qlearning
 
 <img src="PathPlanning/Qlearning/qlearning.gif" width="450" height="350">
-
-## To do list
-
-- RRT
