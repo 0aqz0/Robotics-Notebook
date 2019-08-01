@@ -1,5 +1,3 @@
-# author: 0aqz0
-# date: 2018/11/24
 """
 RRT path planning implementation with python
 """
@@ -22,7 +20,7 @@ class RRTPlanner(PathPlanner):
     def plan(self, start, target):
         self.nodeList = []
         self.nodeList.append(Node(start))
-        for iter in range(int(self.iterations)):
+        for iteration in range(int(self.iterations)):
             # random sample
             randNode = Node(self.randomSample(self.epsilon, target))
             # find the nearest node
@@ -42,7 +40,6 @@ class RRTPlanner(PathPlanner):
                 continue
 
             self.nodeList.append(newNode)
-            # print("iter: ", iter, "newNode", nearestNode.pos.x, nearestNode.pos.y, newNode.pos.x, newNode.pos.y)
             if newNode.pos.dist(target) < self.stepSize:
                 print("final")
                 self.finalPath = []
