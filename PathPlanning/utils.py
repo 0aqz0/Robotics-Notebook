@@ -2,7 +2,6 @@
 collections of common structures
 """
 import math
-import pyglet
 
 class Point(object):
     def __init__(self, x, y):
@@ -131,31 +130,6 @@ class GridMap(Map):
     def __init__(self, top, down, left, right, gridSize):
         Map.__init__(top=top, down=down, left=left, right=right)
         self.gridSize = gridSize
-
-
-class Viewer(object):
-    def __init__(self, width, height, display=None):
-        self.width = width
-        self.height = height
-        self.window = pyglet.window.Window(width=width, height=height, display=display)
-
-    def close(self):
-        self.window.close()
-
-    def render(self):
-        pass
-
-    def draw_circle(self):
-        pass
-
-    def draw_polygon(self):
-        pass
-
-    def draw_line(self):
-        pass
-
-    def draw_obstacle(self):
-        pass
 
 
 class PathPlanner(object):
