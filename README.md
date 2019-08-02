@@ -13,6 +13,9 @@
 ### RRT
 <img src="PathPlanning/RRT/RRT.png" width="450" height="350">
 
+### RRT*
+<img src="PathPlanning/RRTStar/RRTStar.png" width="450" height="350">
+
 ### Qlearning
 
 <img src="PathPlanning/Qlearning/qlearning.gif" width="450" height="350">
