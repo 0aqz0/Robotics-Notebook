@@ -17,6 +17,9 @@ class Point(object):
     def dist(self, other):
         return math.sqrt(pow(self.x - other.x, 2) + pow(self.y - other.y, 2))
 
+    def dir(self, other):
+        return math.atan2(other.y - self.y, other.x - self.x)
+
 
 class Vector(object):
     def __init__(self, x, y):
@@ -25,6 +28,10 @@ class Vector(object):
 
     def mod(self):
         return math.sqrt(pow(self.x, 2) + pow(self.y, 2))
+
+
+def Polar2Vector(dist, theta):
+    return Vector(dist*math.cos(theta), dist*math.sin(theta))
 
 
 class Node(object):
