@@ -17,6 +17,7 @@ except ImportError as err:
     Please install OpenGL.
     ''')
 
+import math
 
 class Viewer(object):
     def __init__(self, width=640, height=480, caption="Robotics Notebook/Path Planning", icon_file="icon.png"):
@@ -45,7 +46,8 @@ class Viewer(object):
     def draw(self):
         self.draw_point(pos=(400, 300), color=(100, 0, 0), pointSize=3)
         self.draw_line(start=(200, 200), end=(400, 400), color=(0, 100, 0), lineWidth=3)
-        # self.draw_circle()
+        self.draw_circle(pos=(100,350), radius=50, res=50, color=(100, 100, 0))
+        self.draw_circle(pos=(100, 50), radius=30, res=10, filled=False, lineWidth=5)
         self.draw_polygon(points=((200, 50), (200, 250), (400, 250), (400, 50)), close=True, lineWidth=3, color=(0, 0, 100))
         self.draw_polygon(points=((500, 250), (500, 350), (600, 350), (600, 250)), filled=True, color=(0, 0, 100))
 
@@ -65,8 +67,17 @@ class Viewer(object):
             line.set_lineWidth(attrs['lineWidth'])
         line.render()
 
-    def draw_circle(self):
-        pass
+    def draw_circle(self, pos, radius, **attrs):
+        circle = Circle(pos=pos, radius=radius)
+        if 'color' in attrs:
+            circle.set_color(*attrs['color'])
+        if 'res' in attrs:
+            circle.set_res(attrs['res'])
+        if 'filled' in attrs:
+            circle.set_filled(attrs['filled'])
+        if 'lineWidth' in attrs:
+            circle.set_lineWidth(attrs['lineWidth'])
+        circle.render()
 
     def draw_polygon(self, points, **attrs):
         polygon = Polygon(points=points)
@@ -153,6 +164,34 @@ class Line(Geom):
     def set_lineWidth(self, width):
         self._lineWidth.width = width
 
+class Circle(Geom):
+    def __init__(self, pos, radius, res=30, filled=True, width=3):
+        Geom.__init__(self)
+        self._pos = pos
+        self._radius = radius
+        self._res = res
+        self._filled = filled
+        self._lineWidth = LineWidth(width=width)
+    def render1(self):
+        if self._filled:
+            glBegin(GL_POLYGON)
+        else:
+            glBegin(GL_LINE_LOOP)
+        for i in range(max(self._res, 5)):
+            angle = 2*math.pi/self._res*i
+            glVertex2d(self._pos[0] + self._radius * math.cos(angle), self._pos[1] + self._radius * math.sin(angle))
+        glEnd()
+    def set_pos(self, pos):
+        self._pos = pos
+    def set_radius(self, radius):
+        self._radius = radius
+    def set_res(self, res):
+        self._res = res
+    def set_filled(self, filled):
+        self._filled = filled
+    def set_lineWidth(self, width):
+        self._lineWidth.width = width
+
 class Polygon(Geom):
     def __init__(self, points, close=True, filled=False, width=3):
         Geom.__init__(self)
@@ -180,7 +219,6 @@ class Polygon(Geom):
         self._filled = filled
     def set_lineWidth(self, width):
         self._lineWidth.width = width
-
 
 
 if __name__ == '__main__':
