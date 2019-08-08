@@ -47,6 +47,7 @@ class Viewer(object):
         self.draw_line(start=(200, 200), end=(400, 400), color=(0, 100, 0), lineWidth=3)
         # self.draw_circle()
         self.draw_polygon(points=((200, 50), (200, 250), (400, 250), (400, 50)), close=True, lineWidth=3, color=(0, 0, 100))
+        self.draw_polygon(points=((500, 250), (500, 350), (600, 350), (600, 250)), filled=True, color=(0, 0, 100))
 
     def draw_point(self, pos, **attrs):
         point = Point(pos=pos)
@@ -73,6 +74,8 @@ class Viewer(object):
             polygon.set_color(*attrs['color'])
         if 'close' in attrs:
             polygon.set_close(attrs['close'])
+        if 'filled' in attrs:
+            polygon.set_filled(attrs['filled'])
         if 'lineWidth' in attrs:
             polygon.set_lineWidth(attrs['lineWidth'])
         polygon.render()
@@ -151,19 +154,30 @@ class Line(Geom):
         self._lineWidth.width = width
 
 class Polygon(Geom):
-    def __init__(self, points, close=True, width=3):
+    def __init__(self, points, close=True, filled=False, width=3):
         Geom.__init__(self)
         self._points = points
         self._close = close
+        self._filled = filled
         self._lineWidth = LineWidth(width=width)
         self.add_attr(self._lineWidth)
     def render1(self):
-        glBegin(GL_LINE_LOOP if self._close else GL_LINE_STRIP)
+        if self._filled:
+            if len(self._points) > 4:
+                glBegin(GL_POLYGON)
+            elif len(self._points) == 4:
+                glBegin(GL_QUADS)
+            else:
+                glBegin(GL_TRIANGLES)
+        else:
+            glBegin(GL_LINE_LOOP if self._close else GL_LINE_STRIP)
         for point in self._points:
             glVertex2d(*point)
         glEnd()
     def set_close(self, close):
         self._close = close
+    def set_filled(self, filled):
+        self._filled = filled
     def set_lineWidth(self, width):
         self._lineWidth.width = width
 
