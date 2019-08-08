@@ -46,7 +46,7 @@ class Viewer(object):
         self.draw_point(pos=(400, 300), color=(100, 0, 0), pointSize=3)
         self.draw_line(start=(200, 200), end=(400, 400), color=(0, 100, 0), lineWidth=3)
         # self.draw_circle()
-        # self.draw_polygon()
+        self.draw_polygon(points=((200, 50), (200, 250), (400, 250), (400, 50)), close=True, lineWidth=3, color=(0, 0, 100))
 
     def draw_point(self, pos, **attrs):
         point = Point(pos=pos)
@@ -67,8 +67,15 @@ class Viewer(object):
     def draw_circle(self):
         pass
 
-    def draw_polygon(self):
-        pass
+    def draw_polygon(self, points, **attrs):
+        polygon = Polygon(points=points)
+        if 'color' in attrs:
+            polygon.set_color(*attrs['color'])
+        if 'close' in attrs:
+            polygon.set_close(attrs['close'])
+        if 'lineWidth' in attrs:
+            polygon.set_lineWidth(attrs['lineWidth'])
+        polygon.render()
 
     def close_viewer(self):
         self.is_open = False
@@ -128,7 +135,6 @@ class Point(Geom):
     def set_pointSize(self, size):
         self._pointSize.size = size
 
-
 class Line(Geom):
     def __init__(self, start, end, width=3):
         Geom.__init__(self)
@@ -144,7 +150,22 @@ class Line(Geom):
     def set_lineWidth(self, width):
         self._lineWidth.width = width
 
-
+class Polygon(Geom):
+    def __init__(self, points, close=True, width=3):
+        Geom.__init__(self)
+        self._points = points
+        self._close = close
+        self._lineWidth = LineWidth(width=width)
+        self.add_attr(self._lineWidth)
+    def render1(self):
+        glBegin(GL_LINE_LOOP if self._close else GL_LINE_STRIP)
+        for point in self._points:
+            glVertex2d(*point)
+        glEnd()
+    def set_close(self, close):
+        self._close = close
+    def set_lineWidth(self, width):
+        self._lineWidth.width = width
 
 
 
