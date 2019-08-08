@@ -44,7 +44,7 @@ class Viewer(object):
 
     def draw(self):
         self.draw_point(pos=(400, 300), color=(100, 0, 0), pointSize=3)
-        # self.draw_line()
+        self.draw_line(start=(200, 200), end=(400, 400), color=(0, 100, 0), lineWidth=3)
         # self.draw_circle()
         # self.draw_polygon()
 
@@ -56,9 +56,13 @@ class Viewer(object):
             point.set_pointSize(attrs['pointSize'])
         point.render()
 
-    def draw_line(self):
-        glLineWidth(3)
-        pyglet.graphics.draw(2, GL_LINES, ('v2i', (100, 100, 200, 200)), ('c3B', (0, 0, 0) * 2))
+    def draw_line(self, start, end, **attrs):
+        line = Line(start=start, end=end)
+        if 'color' in attrs:
+            line.set_color(*attrs['color'])
+        if 'lineWidth' in attrs:
+            line.set_lineWidth(attrs['lineWidth'])
+        line.render()
 
     def draw_circle(self):
         pass
@@ -125,9 +129,21 @@ class Point(Geom):
         self._pointSize.size = size
 
 
-class Line(object):
-    def __init__(self):
-        pass
+class Line(Geom):
+    def __init__(self, start, end, width=3):
+        Geom.__init__(self)
+        self._start = start
+        self._end = end
+        self._lineWidth = LineWidth(width=width)
+        self.add_attr(self._lineWidth)
+    def render1(self):
+        glBegin(GL_LINES)
+        glVertex2d(*self._start)
+        glVertex2d(*self._end)
+        glEnd()
+    def set_lineWidth(self, width):
+        self._lineWidth.width = width
+
 
 
 
