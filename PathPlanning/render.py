@@ -43,18 +43,22 @@ class Viewer(object):
         self.window.flip()
 
     def draw(self):
-        self.draw_point()
-        self.draw_line()
-        self.draw_circle()
-        self.draw_polygon()
+        self.draw_point(pos=(400, 300), color=(100, 0, 0), pointSize=3)
+        # self.draw_line()
+        # self.draw_circle()
+        # self.draw_polygon()
 
-    def draw_point(self):
-        glPointSize(3)
-        pyglet.graphics.draw(1, GL_POINTS, ('v2i', (100, 100)), ('c3B', (255, 0, 0)))
+    def draw_point(self, pos, **attrs):
+        point = Point(pos=pos)
+        if 'color' in attrs:
+            point.set_color(*attrs['color'])
+        if 'pointSize' in attrs:
+            point.set_pointSize(attrs['pointSize'])
+        point.render()
 
     def draw_line(self):
-        glLineWidth(1)
-        pyglet.graphics.draw(2, GL_LINES, ('v2i', (100, 100, 200, 200)))
+        glLineWidth(3)
+        pyglet.graphics.draw(2, GL_LINES, ('v2i', (100, 100, 200, 200)), ('c3B', (0, 0, 0) * 2))
 
     def draw_circle(self):
         pass
@@ -64,6 +68,68 @@ class Viewer(object):
 
     def close_viewer(self):
         self.is_open = False
+
+
+class Attr(object):
+    def enable(self):
+        raise NotImplementedError
+    def disable(self):
+        pass
+
+class Color(Attr):
+    def __init__(self, *color):
+        self.color = color
+    def enable(self):
+        glColor3b(*self.color)
+
+class LineWidth(Attr):
+    def __init__(self, width):
+        self.width = width
+    def enable(self):
+        glLineWidth(self.width)
+
+class PointSize(Attr):
+    def __init__(self, size):
+        self.size = size
+    def enable(self):
+        glPointSize(self.size)
+
+class Geom(object):
+    def __init__(self):
+        self._color = Color(0, 0, 0)
+        self.attrs = [self._color]
+    def render(self):
+        for attr in self.attrs:
+            attr.enable()
+        self.render1()
+        for attr in self.attrs:
+            attr.disable()
+    def render1(self):
+        raise NotImplementedError
+    def add_attr(self, attr):
+        self.attrs.append(attr)
+    def set_color(self, r, g, b):
+        self._color.color = (r, g, b)
+
+class Point(Geom):
+    def __init__(self, pos=(0,0), size=3):
+        Geom.__init__(self)
+        self._pos = pos
+        self._pointSize = PointSize(size=size)
+        self.add_attr(self._pointSize)
+    def render1(self):
+        glBegin(GL_POINTS)
+        glVertex2d(*self._pos)
+        glEnd()
+    def set_pointSize(self, size):
+        self._pointSize.size = size
+
+
+class Line(object):
+    def __init__(self):
+        pass
+
+
 
 
 if __name__ == '__main__':
