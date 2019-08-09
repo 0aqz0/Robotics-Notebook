@@ -6,7 +6,7 @@ def main():
     map.add_obstacle(CircleObstacle(pos=Point(500, 300), radius=50))
     map.add_obstacle(CircleObstacle(pos=Point(100, 100), radius=45))
     map.add_obstacle(RectangleObstacle(top=480, down=200, left=300, right=350))
-    astarPlanner = AStarPlanner(map=map, step_size=10)
+    astarPlanner = AStarPlanner(map=map, step_size=10, heuristic_dist='Euclidean')
     start = Point(0, 0)
     end = Point(640, 480)
     while map.is_open:

@@ -4,11 +4,12 @@ A* path planning implementation with python
 from PathPlanning.utils import *
 
 class AStarPlanner(PathPlanner):
-    def __init__(self, map, iterations=1e4, step_size=5):
+    def __init__(self, map, iterations=1e4, step_size=5, heuristic_dist='Manhattan'):
         PathPlanner.__init__(self)
         self.map = map
         self.iterations = iterations
         self.step_size = step_size
+        self.heuristic_dist = heuristic_dist
         self.motions = [
             Vector(1, 0),                # right          cost: 1
             Vector(0, 1),                # up             cost: 1
@@ -28,7 +29,7 @@ class AStarPlanner(PathPlanner):
         self.open_list.append(Node(start))
 
         for iteration in range(int(self.iterations)):
-            current_node = min(self.open_list, key=lambda node: node.cost + self.heuristic_func(node.pos, target))
+            current_node = min(self.open_list, key=lambda node: node.cost + self.heuristic_func(pos=node.pos, target=target, mode=self.heuristic_dist))
 
             if current_node.pos.dist(target) < self.step_size:
                 print("final")
@@ -63,8 +64,15 @@ class AStarPlanner(PathPlanner):
                 else:
                     self.open_list.append(newNode)
 
-    def heuristic_func(self, pos, target):
-        return abs(pos.x - target.x) + abs(pos.y - target.y)
+    def heuristic_func(self, pos, target, mode='Manhattan'):
+        if mode == 'Manhattan':
+            return abs(pos.x - target.x) + abs(pos.y - target.y)
+        elif mode == 'Euclidean':
+            return pos.dist(target)
+        elif mode == 'Chebyshev':
+            return max(abs(pos.x - target.x), abs(pos.y - target.y))
+        else:
+            raise ValueError('Wrong mode')
 
     def find_in_close_list(self, node):
         for candidate in self.close_list:
