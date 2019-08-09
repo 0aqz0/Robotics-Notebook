@@ -20,6 +20,9 @@ class Point(object):
     def dir(self, other):
         return math.atan2(other.y - self.y, other.x - self.x)
 
+    def tuple(self):
+        return self.x, self.y
+
 
 class Vector(object):
     def __init__(self, x, y):

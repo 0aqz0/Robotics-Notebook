@@ -2,6 +2,7 @@
 collections of common structures
 """
 from PathPlanning.geometry import *
+from PathPlanning.render import Viewer
 
 class Node(object):
     def __init__(self, pos, parent=None, cost=0):
@@ -55,6 +56,9 @@ class RectangleObstacle(Obstacle):
     def type(self):
         return "rectangle"
 
+    def vertex(self):
+        return (self.left, self.down), (self.left, self.top), (self.right, self.top), (self.right, self.down)
+
     def dist(self, other):
         if other.x < self.left:
             if other.y > self.top:
@@ -82,7 +86,7 @@ class RectangleObstacle(Obstacle):
         return self.dist(other) <= avoidDist
 
 
-class Map(object):
+class Map(Viewer):
     def __init__(self, top, down, left, right):
         self.top = max(top, down)
         self.down = min(top, down)
@@ -90,10 +94,14 @@ class Map(object):
         self.right = max(left, right)
         self.length = math.fabs(left - right)
         self.width = math.fabs(top - down)
+        Viewer.__init__(self, width=self.length, height=self.width)
         self.obstacles = []
 
     def out_of_map(self, pos):
         return pos.x < self.left or pos.x > self.right or pos.y < self.down or pos.y > self.top
+
+    def add_obstacle(self, obs):
+        self.obstacles.append(obs)
 
     def check_collision(self, other, avoidDist):
         for obs in self.obstacles:
@@ -101,11 +109,22 @@ class Map(object):
                 return True
         return False
 
-
-class GridMap(Map):
-    def __init__(self, top, down, left, right, gridSize):
-        Map.__init__(top=top, down=down, left=left, right=right)
-        self.gridSize = gridSize
+    def draw(self):
+        # draw borders
+        # self.draw_line(start=(self.left, self.down), end=(self.left, self.top), lineWidth=5)
+        # self.draw_line(start=(self.left, self.top), end=(self.right, self.top), lineWidth=5)
+        # self.draw_line(start=(self.right, self.top), end=(self.right, self.down), lineWidth=5)
+        # self.draw_line(start=(self.right, self.down), end=(self.left, self.down), lineWidth=5)
+        # draw obstacles
+        for obs in self.obstacles:
+            if obs.type() == 'circle':
+                self.draw_circle(pos=obs.pos.tuple(), radius=obs.radius)
+            elif obs.type() == 'rectangle':
+                self.draw_polygon(points=obs.vertex(), )
+        # draw geoms
+        for geom in self.geoms:
+            geom.render()
+        self.geoms = []
 
 
 class PathPlanner(object):

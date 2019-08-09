@@ -18,6 +18,7 @@ except ImportError as err:
     ''')
 
 import math
+import os
 
 class Viewer(object):
     def __init__(self, width=640, height=480, caption="Robotics Notebook/Path Planning", icon_file="icon.png"):
@@ -27,13 +28,14 @@ class Viewer(object):
         display = platform.get_default_display()
         # screen = display.get_default_screen()
         config = Config(double_buffer=True)
-        self.window = pyglet.window.Window(width=width, height=height, display=display,
+        self.window = pyglet.window.Window(width=int(width), height=int(height), display=display,
                                            config=config, caption=caption)
-        icon = pyglet.image.load(icon_file)
+        icon = pyglet.image.load(os.path.dirname(__file__) + '/' + icon_file)
         self.window.set_icon(icon)
         self.is_open = True
         self.window.on_close = self.close_viewer
         self.window.on_draw = self.draw
+        self.geoms = []
 
     def render(self):
         glClearColor(1,1,1,1)
@@ -42,6 +44,12 @@ class Viewer(object):
         self.window.dispatch_events()
         self.window.dispatch_event('on_draw')
         self.window.flip()
+
+    def add_geometry(self, type, **attrs):
+        if type == 'point':
+            self.geoms.append(Point(**attrs))
+        elif type == 'line':
+            self.geoms.append(Line(**attrs))
 
     def draw(self):
         self.draw_point(pos=(400, 300), color=(100, 0, 0), pointSize=3)
@@ -137,11 +145,13 @@ class Geom(object):
         self._color.color = (r, g, b)
 
 class Point(Geom):
-    def __init__(self, pos=(0,0), size=3):
+    def __init__(self, pos=(0,0), size=3, color=None):
         Geom.__init__(self)
         self._pos = pos
         self._pointSize = PointSize(size=size)
         self.add_attr(self._pointSize)
+        if color is not None:
+            self.set_color(*color)
     def render1(self):
         glBegin(GL_POINTS)
         glVertex2d(*self._pos)
@@ -150,12 +160,14 @@ class Point(Geom):
         self._pointSize.size = size
 
 class Line(Geom):
-    def __init__(self, start, end, width=3):
+    def __init__(self, start, end, width=3, color=None):
         Geom.__init__(self)
         self._start = start
         self._end = end
         self._lineWidth = LineWidth(width=width)
         self.add_attr(self._lineWidth)
+        if color is not None:
+            self.set_color(*color)
     def render1(self):
         glBegin(GL_LINES)
         glVertex2d(*self._start)
@@ -165,13 +177,15 @@ class Line(Geom):
         self._lineWidth.width = width
 
 class Circle(Geom):
-    def __init__(self, pos, radius, res=30, filled=True, width=3):
+    def __init__(self, pos, radius, res=30, filled=True, width=3, color=None):
         Geom.__init__(self)
         self._pos = pos
         self._radius = radius
         self._res = res
         self._filled = filled
         self._lineWidth = LineWidth(width=width)
+        if color is not None:
+            self.set_color(*color)
     def render1(self):
         if self._filled:
             glBegin(GL_POLYGON)
@@ -193,13 +207,15 @@ class Circle(Geom):
         self._lineWidth.width = width
 
 class Polygon(Geom):
-    def __init__(self, points, close=True, filled=False, width=3):
+    def __init__(self, points, close=True, filled=False, width=3, color=None):
         Geom.__init__(self)
         self._points = points
         self._close = close
         self._filled = filled
         self._lineWidth = LineWidth(width=width)
         self.add_attr(self._lineWidth)
+        if color is not None:
+            self.set_color(*color)
     def render1(self):
         if self._filled:
             if len(self._points) > 4:
