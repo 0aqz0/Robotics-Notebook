@@ -4,7 +4,7 @@
 
 ### A*
 
-<img src="PathPlanning/astar/astar.gif" width="450" height="350">
+<img src="PathPlanning/AStar/AStar.png" width="450" height="350">
 
 ### Dijkstra
 
