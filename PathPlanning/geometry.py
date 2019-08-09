@@ -32,6 +32,9 @@ class Vector(object):
     def mod(self):
         return math.sqrt(pow(self.x, 2) + pow(self.y, 2))
 
+    def __mul__(self, other):
+        return Vector(other*self.x, other*self.y)
+
 
 def Polar2Vector(dist, theta):
     return Vector(dist*math.cos(theta), dist*math.sin(theta))
