@@ -13,7 +13,7 @@
 ### RRT
 <img src="PathPlanning/RRT/RRT.png" width="450" height="350">
 
-Reference:
+*Reference*:
 
 [Rapidly-Exploring Random Trees: A New Tool for Path Planning](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.35.1853)
 
