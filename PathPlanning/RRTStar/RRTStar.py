@@ -1,15 +1,15 @@
 """
 RRT* path planning implementation with python
 """
-from PathPlanning.utils import PathPlanner, Point, Node, Vector, Polar2Vector
+from PathPlanning.utils import *
 import random
 import math
 
 class RRTStarPlanner(PathPlanner):
     """
-    Path Planner using RRT algorithm.
+    Path Planner using RRT* algorithm.
     """
-    def __init__(self, map, iterations=1e4, epsilon=0.05, stepSize=5):
+    def __init__(self, map, iterations=1e4, epsilon=0.2, stepSize=10):
         PathPlanner.__init__(self)
         self.nodeList = []
         self.map = map
@@ -40,7 +40,7 @@ class RRTStarPlanner(PathPlanner):
                 continue
 
             # choose best parent
-            radius = 80.0*math.sqrt(math.log(len(self.nodeList))/len(self.nodeList))
+            radius = 100.0*math.sqrt(math.log(len(self.nodeList))/len(self.nodeList))
             self.chooseBestParent(newNode, radius)
             # rewire
             self.rewire(newNode, radius)
