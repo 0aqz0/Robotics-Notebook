@@ -35,3 +35,8 @@
 ### Qlearning
 
 <img src="PathPlanning/Qlearning/qlearning.gif" width="450" height="350">
+
+*Reference*:
+
+[**Path Planning with qlearning**](<https://github.com/0aqz0/path-planning-with-qlearning>)
+
