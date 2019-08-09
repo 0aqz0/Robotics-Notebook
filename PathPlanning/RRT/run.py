@@ -8,8 +8,8 @@ def main():
     start = Point(0, 0)
     end = Point(640, 480)
     rrtPlanner = RRTPlanner(map, epsilon=0.05, stepSize=10)
-    rrtPlanner.plan(start=start, target=end)
     while map.is_open:
+        rrtPlanner.plan(start=start, target=end)
         map.add_geometry(type='point', pos=start.tuple(), size=30, color=(100, 0, 0))
         map.add_geometry(type='point', pos=end.tuple(), size=30, color=(0, 100, 0))
         for node in rrtPlanner.nodeList:
