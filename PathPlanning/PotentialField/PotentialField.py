@@ -45,9 +45,9 @@ class PotentialFieldPlanner(PathPlanner):
 
     def calculate_attractive_potential(self, pos, target):
         if pos.dist(target) <= self.da:
-            return self.ka * pos.dist(target) ** 2
+            return 0.5 * self.ka * pos.dist(target) ** 2
         else:
-            return self.ka * (2 * self.da * pos.dist(target) - self.da ** 2)
+            return self.ka * (self.da * pos.dist(target) - 0.5 * self.da ** 2)
 
     def calculate_repulsive_potential(self, pos):
         pr = 0
