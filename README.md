@@ -18,6 +18,14 @@
 
 [Dijkstra's algorithm - Wikipedia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
 
+### Potential Field
+
+<img src="PathPlanning/PotentialField/PotentialField.png" width="450" height="350">
+
+*Reference*:
+
+[Robotic Motion Planning: Potential Functions](https://www.cs.cmu.edu/~motionplanning/lecture/Chap4-Potential-Field_howie.pdf)
+
 ### RRT
 <img src="PathPlanning/RRT/RRT.png" width="450" height="350">
 
