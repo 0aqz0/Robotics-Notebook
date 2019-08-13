@@ -2,14 +2,6 @@
 
 ## Path Planning
 
-### A*
-
-<img src="PathPlanning/AStar/AStar.png" width="450" height="350">
-
-*Reference*:
-
-[A* search algorithm - Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm)
-
 ### Dijkstra
 
 <img src="PathPlanning/Dijkstra/Dijkstra.png" width="450" height="350">
@@ -17,6 +9,14 @@
 *Reference*:
 
 [Dijkstra's algorithm - Wikipedia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
+
+### A*
+
+<img src="PathPlanning/AStar/AStar.png" width="450" height="350">
+
+*Reference*:
+
+[A* search algorithm - Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm)
 
 ### Potential Field
 
