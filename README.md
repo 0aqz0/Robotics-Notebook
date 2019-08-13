@@ -2,10 +2,10 @@
 
 - [Path Planning](#Path-Planning)
   - [Dijkstra](#Dijkstra)
-  - [A*](#A-*)
+  - [A*](#AStar)
   - [Potential Field](#Potential-Field)
   - [RRT](#RRT)
-  - [RRT*](#RRT-*)
+  - [RRT*](#RRTStar)
   - [Qlearning](#Qlearning)
 
 ## Path Planning
@@ -18,7 +18,7 @@
 
 [Dijkstra's algorithm - Wikipedia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
 
-### A*
+### A* <a name="AStar"></a>
 
 <img src="PathPlanning/AStar/AStar.png" width="450" height="350">
 
@@ -41,7 +41,7 @@
 
 [Rapidly-Exploring Random Trees: A New Tool for Path Planning](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.35.1853)
 
-### RRT*
+### RRT* <a name="RRTStar"></a>
 <img src="PathPlanning/RRTStar/RRTStar.png" width="450" height="350">
 
 *Reference*:
