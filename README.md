@@ -1,5 +1,13 @@
 # Robotics-Notebook
 
+- [Path Planning](#Path Planning)
+  - [Dijkstra](#Dijkstra)
+  - [A*](A*)
+  - [Potential Field](Potential Field)
+  - [RRT](RRT)
+  - [RRT*](RRT*)
+  - [Qlearning](Qlearning)
+
 ## Path Planning
 
 ### Dijkstra
