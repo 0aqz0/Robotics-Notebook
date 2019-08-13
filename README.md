@@ -6,6 +6,7 @@
   - [Potential Field](#Potential-Field)
   - [RRT](#RRT)
   - [RRT*](#RRTStar)
+  - [RRT* Smart](#RRTStarSmart)
   - [Qlearning](#Qlearning)
 
 ## Path Planning
@@ -47,6 +48,16 @@
 *Reference*:
 
 [Sampling-based algorithms for optimal motion planning](https://journals.sagepub.com/doi/abs/10.1177/0278364911406761)
+
+### RRT* Smart <a name="RRTStarSmart"></a>
+
+<img src="PathPlanning/RRTStarSmart/RRTStarSmart.png" width="450" height="350">
+
+*Reference*:
+
+[RRT*-SMART: A Rapid Convergence Implementation of RRT*](https://journals.sagepub.com/doi/pdf/10.5772/56718)
+
+[A Comparison of RRT, RRT* and RRT*-Smart Path Planning Algorithms](http://paper.ijcsns.org/07_book/201610/20161004.pdf)
 
 ### Qlearning
 
