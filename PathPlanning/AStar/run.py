@@ -9,8 +9,8 @@ def main():
     astarPlanner = AStarPlanner(map=map, step_size=30, heuristic_dist='Euclidean')
     start = Point(0, 0)
     end = Point(640, 480)
+    astarPlanner.plan(start=start, target=end)
     while map.is_open:
-        astarPlanner.plan(start=start, target=end)
         map.add_geometry(type='point', pos=start.tuple(), size=30, color=(100, 0, 0))
         map.add_geometry(type='point', pos=end.tuple(), size = 30, color=(0, 100, 0))
         for i in range(len(astarPlanner.finalPath)-1):
