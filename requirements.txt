@@ -1,2 +1,3 @@
 future==0.17.1
 pyglet==1.3.0
+-e git+https://github.com/0aqz0/Robotics-Notebook.git@c5aac3d582c7a0df1d7652e238043578c46b7a6d#egg=Robotics_Notebook
