@@ -29,11 +29,17 @@ class Vector(object):
         self.x = x
         self.y = y
 
+    def dir(self):
+        return math.atan2(self.y, self.x)
+
     def mod(self):
         return math.sqrt(pow(self.x, 2) + pow(self.y, 2))
 
     def __mul__(self, other):
         return Vector(other*self.x, other*self.y)
+
+    def __add__(self, other):
+        return Vector(self.x+other.x, self.y+other.y)
 
 
 def Polar2Vector(dist, theta):

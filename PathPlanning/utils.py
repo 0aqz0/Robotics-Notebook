@@ -87,13 +87,14 @@ class RectangleObstacle(Obstacle):
 
 
 class Map(Viewer):
-    def __init__(self, top, down, left, right):
+    def __init__(self, top, down, left, right, refresh=True):
         self.top = max(top, down)
         self.down = min(top, down)
         self.left = min(left, right)
         self.right = max(left, right)
         self.length = math.fabs(left - right)
         self.width = math.fabs(top - down)
+        self.refresh = refresh
         Viewer.__init__(self, width=self.length, height=self.width)
         self.obstacles = []
 
@@ -115,16 +116,17 @@ class Map(Viewer):
         # self.draw_line(start=(self.left, self.top), end=(self.right, self.top), lineWidth=5)
         # self.draw_line(start=(self.right, self.top), end=(self.right, self.down), lineWidth=5)
         # self.draw_line(start=(self.right, self.down), end=(self.left, self.down), lineWidth=5)
+        # draw geoms
+        for geom in self.geoms:
+            geom.render()
         # draw obstacles
         for obs in self.obstacles:
             if obs.type() == 'circle':
                 self.draw_circle(pos=obs.pos.tuple(), radius=obs.radius)
             elif obs.type() == 'rectangle':
-                self.draw_polygon(points=obs.vertex(), )
-        # draw geoms
-        for geom in self.geoms:
-            geom.render()
-        self.geoms = []
+                self.draw_polygon(points=obs.vertex(), filled=True)
+        if self.refresh:
+            self.geoms = []
 
 
 class PathPlanner(object):

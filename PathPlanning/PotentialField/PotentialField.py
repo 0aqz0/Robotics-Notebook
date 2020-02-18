@@ -45,9 +45,9 @@ class PotentialFieldPlanner(PathPlanner):
 
     def calculate_attractive_potential(self, pos, target):
         if pos.dist(target) <= self.da:
-            return 0.5 * self.ka * pos.dist(target) ** 2
+            return self.ka * pos.dist(target) ** 2
         else:
-            return self.ka * (self.da * pos.dist(target) - 0.5 * self.da ** 2)
+            return self.ka * (2 * self.da * pos.dist(target) - self.da ** 2)
 
     def calculate_repulsive_potential(self, pos):
         pr = 0
@@ -57,3 +57,18 @@ class PotentialFieldPlanner(PathPlanner):
             if obs.dist(pos) <= self.dr:
                 pr = pr + 0.5 * self.kr * (1/obs.dist(pos) - 1/self.dr) ** 2
         return pr
+
+    def calculate_potential_force(self, pos, target):
+        # attractive force(simple version)
+        attractive_force = Vector(pos.x - target.x, pos.y - target.y) * (-self.ka)
+        # repulsive force
+        repulsive_force = Vector(0, 0)
+        for obs in self.map.obstacles:
+            if obs.dist(pos) == 0:
+                repulsive_force += Vector(float('inf'), float('inf'))
+            elif obs.dist(pos) <= self.dr:
+                repulsive_force += Vector(pos.x - obs.pos.x, pos.y - obs.pos.y) * self.kr * (1/obs.dist(pos) - 1/self.dr) * ((1/obs.dist(pos))**2) * (1/obs.dist(pos))
+        # sum up
+        potential_force = attractive_force + repulsive_force
+
+        return potential_force
