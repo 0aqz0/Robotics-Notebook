@@ -67,3 +67,14 @@
 
 [**Path Planning with qlearning**](<https://github.com/0aqz0/path-planning-with-qlearning>)
 
+## Getting Started
+
+```bash
+$ git clone git@github.com:0aqz0/Robotics-Notebook.git
+$ cd Robotics-Notebook
+$ virtualenv.exe venv
+$ source venv/Scripts/activate
+$ pip install -r requirements.txt
+$ pip install -e .
+$ python PathPlanning/AStar/run.py
+```
